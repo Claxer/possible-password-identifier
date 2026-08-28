@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Password Finder Generator</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="hero">
+        <div class="logo">
+            <span class="logo-icon">⌘</span>
+        </div>
+
+        <p class="eyebrow">PASSWORD ANALYSIS TOOL</p>
+
+        <h1>
+            Password Finder
+            <span>Generator</span>
+        </h1>
+
+        <p class="subtitle">
+            Analyze password permutations and explore every possible arrangement.
+        </p>
+    </header>
+
+
+    <!-- Main Card -->
+    <section class="card analyzer-card">
+
+        <div class="card-header">
+            <div>
+                <h2>Analyze Password</h2>
+                <p>Enter a password to calculate its possible arrangements.</p>
+            </div>
+
+            <div class="status-dot">
+                <span></span>
+                Ready
+            </div>
+        </div>
+
+
+        <!-- Password Input -->
+        <div class="input-section">
+
+            <label for="passwordInput">
+                Password
+            </label>
+
+            <div class="input-wrapper">
+
+                <input
+                    type="text"
+                    id="passwordInput"
+                    placeholder="Enter a password..."
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    class="visibility-btn"
+                    id="visibilityBtn"
+                    title="Show / Hide password"
+                >
+                    ◉
+                </button>
+
+            </div>
+
+            <div class="input-info">
+                <span id="characterCount">0 characters</span>
+                <span>Permutation analysis</span>
+            </div>
+
+        </div>
+
+
+        <!-- Analyze Button -->
+        <button class="analyze-btn" id="analyzeBtn">
+
+            <span>Analyze Password</span>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </button>
+
+        <p class="error-message" id="errorMessage"></p>
+
+    </section>
+
+
+    <!-- Results -->
+    <section class="results-section hidden" id="resultsSection">
+
+        <div class="section-title">
+            <div>
+                <p class="eyebrow">ANALYSIS RESULTS</p>
+                <h2>Password Overview</h2>
+            </div>
+        </div>
+
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    Aa
+                </div>
+
+                <div>
+                    <p>Password Length</p>
+                    <h3 id="passwordLength">0</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    n!
+                </div>
+
+                <div>
+                    <p>Mathematical Possibilities</p>
+                    <h3 id="totalPossible">0</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    #
+                </div>
+
+                <div>
+                    <p>Unique Results</p>
+                    <h3 id="uniqueResults">0</h3>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Formula -->
+        <div class="card formula-card">
+
+            <div>
+                <p class="small-label">FACTORIAL FORMULA</p>
+
+                <div class="formula" id="formula">
+                    0! = 1
+                </div>
+            </div>
+
+            <div class="formula-description">
+                Each character can occupy a different position,
+                creating multiple possible arrangements.
+            </div>
+
+        </div>
+
+
+        <!-- Warning -->
+        <div class="warning hidden" id="warningBox">
+
+            <span class="warning-icon">!</span>
+
+            <div>
+                <strong>Large number of combinations</strong>
+
+                <p>
+                    Generating every permutation may use a large amount
+                    of memory. Consider using a shorter password.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Results List -->
+        <div class="card permutations-card">
+
+            <div class="results-header">
+
+                <div>
+                    <p class="small-label">GENERATED RESULTS</p>
+
+                    <h2>
+                        Possible Passwords
+                    </h2>
+                </div>
+
+                <div class="result-actions">
+
+                    <button
+                        class="secondary-btn"
+                        id="copyAllBtn"
+                    >
+                        Copy All
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        id="downloadBtn"
+                    >
+                        Download
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Search -->
+            <div class="search-wrapper">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search generated passwords..."
+                >
+
+            </div>
+
+
+            <!-- Password Results -->
+            <div
+                class="password-list"
+                id="passwordList"
+            >
+            </div>
+
+
+            <div
+                class="empty-results hidden"
+                id="emptyResults"
+            >
+                No matching passwords found.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            Password Finder Generator
+        </p>
+
+        <span>
+            Built with HTML, CSS & JavaScript
+        </span>
+
+    </footer>
+
+</main>
+
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>
