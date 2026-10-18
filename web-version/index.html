@@ -1,298 +1,254 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-```
-<title>Password Finder Generator</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
-```
-
+    <meta name="theme-color" content="#11111b">
+    <title>Possible Password Identifier</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-
 <body>
-
-```
-<div class="background-glow glow-one"></div>
-<div class="background-glow glow-two"></div>
-
-<main class="container">
-
-    <!-- Header -->
-    <header class="hero">
-        <div class="logo">
-            <span class="logo-icon">⌘</span>
-        </div>
-
-        <p class="eyebrow">PASSWORD ANALYSIS TOOL</p>
-
-        <h1>
-            Password Finder
-            <span>Generator</span>
-        </h1>
-
-        <p class="subtitle">
-            Analyze password permutations and explore every possible arrangement.
-        </p>
-    </header>
-
-
-    <!-- Main Card -->
-    <section class="card analyzer-card">
-
-        <div class="card-header">
-            <div>
-                <h2>Analyze Password</h2>
-                <p>Enter a password to calculate its possible arrangements.</p>
-            </div>
-
-            <div class="status-dot">
-                <span></span>
-                Ready
-            </div>
-        </div>
-
-
-        <!-- Password Input -->
-        <div class="input-section">
-
-            <label for="passwordInput">
-                Password
-            </label>
-
-            <div class="input-wrapper">
-
-                <input
-                    type="text"
-                    id="passwordInput"
-                    placeholder="Enter a password..."
-                    autocomplete="off"
-                >
-
-                <button
-                    type="button"
-                    class="visibility-btn"
-                    id="visibilityBtn"
-                    title="Show / Hide password"
-                >
-                    ◉
-                </button>
-
-            </div>
-
-            <div class="input-info">
-                <span id="characterCount">0 characters</span>
-                <span>Permutation analysis</span>
-            </div>
-
-        </div>
-
-
-        <!-- Analyze Button -->
-        <button class="analyze-btn" id="analyzeBtn">
-
-            <span>Analyze Password</span>
-
-            <span class="arrow">
-                →
-            </span>
-
-        </button>
-
-        <p class="error-message" id="errorMessage"></p>
-
-    </section>
-
-
-    <!-- Results -->
-    <section class="results-section hidden" id="resultsSection">
-
-        <div class="section-title">
-            <div>
-                <p class="eyebrow">ANALYSIS RESULTS</p>
-                <h2>Password Overview</h2>
-            </div>
-        </div>
-
-
-        <!-- Statistics -->
-        <div class="stats-grid">
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    Aa
-                </div>
-
+    <div class="app">
+        <aside class="sidebar">
+            <a class="brand" href="#">
+                <div class="brand-icon">P</div>
                 <div>
-                    <p>Password Length</p>
-                    <h3 id="passwordLength">0</h3>
+                    <strong>Password Lab</strong>
+                    <span>COMBINATION ANALYZER</span>
                 </div>
+            </a>
 
+            <div class="nav-label">WORKSPACE</div>
+
+            <button class="nav-item active" data-view="generator">
+                <span>▦</span> Generator
+            </button>
+            <button class="nav-item" data-view="analyzer">
+                <span>⌕</span> Text Analyzer
+            </button>
+            <button class="nav-item" data-view="about">
+                <span>ⓘ</span> About Project
+            </button>
+
+            <div class="sidebar-bottom">
+                <div class="status-dot"></div>
+                <span>Local application</span>
+                <span class="version">v2.0</span>
             </div>
+        </aside>
 
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    n!
-                </div>
-
+        <main class="main">
+            <header class="topbar">
                 <div>
-                    <p>Mathematical Possibilities</p>
-                    <h3 id="totalPossible">0</h3>
+                    <div class="eyebrow">PERSONAL PROJECT / TOOLKIT</div>
+                    <h1 id="page-title">Combination Generator</h1>
+                </div>
+                <div class="local-badge">
+                    <span class="status-dot"></span>
+                    Runs in your browser
+                </div>
+            </header>
+
+            <section class="view active" id="generator-view">
+                <div class="intro">
+                    <div>
+                        <h2>Explore character combinations.</h2>
+                        <p>Configure a character set, calculate the search space, and generate a limited set of combinations for educational use.</p>
+                    </div>
+                    <div class="intro-mark">P<span>/</span></div>
                 </div>
 
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    #
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <span class="stat-label">UNIQUE CHARACTERS</span>
+                        <strong id="stat-characters">26</strong>
+                        <span class="stat-foot">In current character set</span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">POSSIBLE STRINGS</span>
+                        <strong id="stat-total">26</strong>
+                        <span class="stat-foot">Across selected lengths</span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">GENERATED</span>
+                        <strong id="stat-generated">0</strong>
+                        <span class="stat-foot">In current session</span>
+                    </article>
                 </div>
 
-                <div>
-                    <p>Unique Results</p>
-                    <h3 id="uniqueResults">0</h3>
+                <div class="workspace-grid">
+                    <section class="panel settings-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <div class="section-kicker">CONFIGURATION</div>
+                                <h3>Generation settings</h3>
+                            </div>
+                            <span class="panel-number">01</span>
+                        </div>
+
+                        <label for="preset">Character preset</label>
+                        <select id="preset">
+                            <option value="lower">Lowercase letters (a-z)</option>
+                            <option value="upper">Uppercase letters (A-Z)</option>
+                            <option value="digits">Numbers (0-9)</option>
+                            <option value="symbols">Common symbols</option>
+                            <option value="alnum" selected>Letters and numbers</option>
+                            <option value="all">Letters, numbers, symbols</option>
+                            <option value="custom">Custom characters</option>
+                        </select>
+
+                        <label for="characters">Character set</label>
+                        <textarea id="characters" rows="3" spellcheck="false" placeholder="Enter characters to use"></textarea>
+                        <div class="field-note">Duplicate characters are removed automatically.</div>
+
+                        <div class="two-columns">
+                            <div>
+                                <label for="min-length">Minimum length</label>
+                                <input type="number" id="min-length" min="1" max="12" value="1">
+                            </div>
+                            <div>
+                                <label for="max-length">Maximum length</label>
+                                <input type="number" id="max-length" min="1" max="12" value="2">
+                            </div>
+                        </div>
+
+                        <div class="option-box">
+                            <div>
+                                <strong>Allow repeated characters</strong>
+                                <p>Example: aa, ab, ba, bb</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="repeats" checked>
+                                <span class="switch-track"></span>
+                            </label>
+                        </div>
+
+                        <div class="limit-note">
+                            <strong>Generation limit: 100,000</strong>
+                            <p>Large combinations can take time. The app limits output to keep your browser responsive.</p>
+                        </div>
+
+                        <button class="button primary full-width" id="generate-btn">
+                            <span>▶</span> Generate combinations
+                        </button>
+                        <button class="button secondary full-width" id="stop-btn" disabled>
+                            Stop generation
+                        </button>
+                    </section>
+
+                    <section class="panel results-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <div class="section-kicker">OUTPUT</div>
+                                <h3>Generated results</h3>
+                            </div>
+                            <span class="result-counter" id="result-counter">0 items</span>
+                        </div>
+
+                        <div class="progress-area">
+                            <div class="progress-meta">
+                                <span id="progress-label">Ready to generate</span>
+                                <span id="progress-percent">0%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-bar" id="progress-bar"></div>
+                            </div>
+                        </div>
+
+                        <div class="results-toolbar">
+                            <input type="search" id="search-results" placeholder="Filter generated results..." aria-label="Filter generated results">
+                            <button class="button secondary small" id="copy-visible-btn">Copy visible</button>
+                        </div>
+
+                        <div class="results-list" id="results-list" aria-live="polite">
+                            <div class="empty-state">
+                                <div class="empty-icon">⌘</div>
+                                <h3>No results yet</h3>
+                                <p>Configure your settings and start generating.</p>
+                            </div>
+                        </div>
+
+                        <div class="results-footer">
+                            <span id="showing-count">Showing 0 results</span>
+                            <button class="button secondary small" id="export-btn" disabled>↓ Export TXT</button>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <section class="view" id="analyzer-view">
+                <div class="intro">
+                    <div>
+                        <h2>Analyze sample text.</h2>
+                        <p>Inspect character composition and see an illustrative entropy estimate. Avoid entering real passwords.</p>
+                    </div>
+                    <div class="intro-mark">A<span>/</span></div>
                 </div>
 
-            </div>
+                <section class="panel analyzer-panel">
+                    <label for="sample-text">Sample text</label>
+                    <textarea id="sample-text" rows="4" placeholder="Enter sample text to analyze..."></textarea>
+                    <div class="analyzer-actions">
+                        <span class="field-note">Analysis runs locally in your browser.</span>
+                        <button class="button primary" id="analyze-btn">Analyze text</button>
+                    </div>
 
-        </div>
+                    <div class="analysis-results" id="analysis-results">
+                        <div class="empty-state">
+                            <h3>Waiting for input</h3>
+                            <p>Your analysis will appear here.</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
 
-
-        <!-- Formula -->
-        <div class="card formula-card">
-
-            <div>
-                <p class="small-label">FACTORIAL FORMULA</p>
-
-                <div class="formula" id="formula">
-                    0! = 1
-                </div>
-            </div>
-
-            <div class="formula-description">
-                Each character can occupy a different position,
-                creating multiple possible arrangements.
-            </div>
-
-        </div>
-
-
-        <!-- Warning -->
-        <div class="warning hidden" id="warningBox">
-
-            <span class="warning-icon">!</span>
-
-            <div>
-                <strong>Large number of combinations</strong>
-
-                <p>
-                    Generating every permutation may use a large amount
-                    of memory. Consider using a shorter password.
-                </p>
-            </div>
-
-        </div>
-
-
-        <!-- Results List -->
-        <div class="card permutations-card">
-
-            <div class="results-header">
-
-                <div>
-                    <p class="small-label">GENERATED RESULTS</p>
-
-                    <h2>
-                        Possible Passwords
-                    </h2>
+            <section class="view" id="about-view">
+                <div class="intro">
+                    <div>
+                        <h2>A learning project.</h2>
+                        <p>A small educational toolkit for understanding character sets, combinatorics, and text analysis.</p>
+                    </div>
+                    <div class="intro-mark">i<span>/</span></div>
                 </div>
 
-                <div class="result-actions">
-
-                    <button
-                        class="secondary-btn"
-                        id="copyAllBtn"
-                    >
-                        Copy All
-                    </button>
-
-                    <button
-                        class="secondary-btn"
-                        id="downloadBtn"
-                    >
-                        Download
-                    </button>
-
+                <div class="about-grid">
+                    <article class="panel">
+                        <div class="section-kicker">01 / GENERATION</div>
+                        <h3>Character combinations</h3>
+                        <p>Choose a character set and length range to generate ordered strings. Results are capped to limit browser memory usage.</p>
+                    </article>
+                    <article class="panel">
+                        <div class="section-kicker">02 / MATHEMATICS</div>
+                        <h3>Combination statistics</h3>
+                        <p>When repetition is allowed, the number of strings of length n from an alphabet of k characters is kⁿ.</p>
+                    </article>
+                    <article class="panel">
+                        <div class="section-kicker">03 / ANALYSIS</div>
+                        <h3>Character inspection</h3>
+                        <p>Review length, character classes, and a rough theoretical entropy estimate based on the observed character categories.</p>
+                    </article>
+                    <article class="panel">
+                        <div class="section-kicker">04 / PRIVACY</div>
+                        <h3>Local processing</h3>
+                        <p>The application has no server connection and does not send your inputs anywhere. Generated files are saved only when you export them.</p>
+                    </article>
                 </div>
 
-            </div>
+                <div class="notice">
+                    <strong>Important limitation</strong>
+                    <p>This tool does not discover actual account passwords, verify credentials, or connect to login services. Entropy estimates are theoretical and may overstate the unpredictability of human-chosen text.</p>
+                </div>
+            </section>
 
+            <footer class="footer">
+                <span>Possible Password Identifier <span class="muted">/ Educational edition</span></span>
+                <span>HTML · CSS · JavaScript</span>
+            </footer>
+        </main>
+    </div>
 
-            <!-- Search -->
-            <div class="search-wrapper">
-
-                <span class="search-icon">
-                    ⌕
-                </span>
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search generated passwords..."
-                >
-
-            </div>
-
-
-            <!-- Password Results -->
-            <div
-                class="password-list"
-                id="passwordList"
-            >
-            </div>
-
-
-            <div
-                class="empty-results hidden"
-                id="emptyResults"
-            >
-                No matching passwords found.
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Footer -->
-    <footer>
-
-        <p>
-            Password Finder Generator
-        </p>
-
-        <span>
-            Built with HTML, CSS & JavaScript
-        </span>
-
-    </footer>
-
-</main>
-
-
-<script src="script.js"></script>
-```
-
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
